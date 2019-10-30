@@ -5,7 +5,11 @@ An Annotation based validation library for use with Android's DataBinding librar
  - Annotation Processing to eliminate reflection and generate boilerplate validation classes
 
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Kubwa-green.svg?style=true)](https://android-arsenal.com/details/1/4428)
-[![Download](https://api.bintray.com/packages/wesleyjasonelliott/maven/kubwa-compiler/images/download.svg) ](https://bintray.com/wesleyjasonelliott/maven/kubwa-compiler/_latestVersion)
+[![Download](https://jitpack.io/v/WesleyElliott/Kubwa.svg)](https://jitpack.io/#WesleyElliott/Kubwa)
+
+## !Important!
+The new `v2.0.0` has some breaking changes related to Gradle. This library is no longer hosted on jCenter, and is now available via JitPack. Please see [Download](#download) for more info on using the new version.
+Code wise, this release has nothing new - so existing apps looking to target AndroidX can continue to use the library
 
 ## Usage
 1. Simply annotate your ViewModel class with the validation rules need:
@@ -73,36 +77,39 @@ An Annotation based validation library for use with Android's DataBinding librar
   And thats it! `notifyChange()` will ensure the errors (if any) are shown on the correct EditText's
 
 ## Download
-Make sure your project level gradle config (`build.gradle`) has the jcenter repository:
+Make sure your project level gradle config (`build.gradle`) has the jitpack repository:
 
 ```gradle
-buildscript {
+allprojects {
   repositories {
-    mavenCentral()
-    jcenter()
-   }
+    ...
+    maven { url 'https://jitpack.io' }
+  }
 }
 ```
 
-Add the `kubwa-compiler` and `kubwa-annotations` dependancies and make sure Android DataBinding is setup:
+Add the `kubwa-compiler` and `kubwa-annotations` and `kubwa` dependancies and make sure Android DataBinding is setup:
 ```gradle
 android {
   ...
 
   dataBinding {
-        enabled = true
-    }
+      enabled = true
+  }
 }
 
 dependencies {
-  implementation 'com.wesleyelliott:kubwa-annotations:1.2.0'
-  annotationProcessor 'com.wesleyelliott:kubwa-compiler:1.2.0'
+  implementation 'com.github.WesleyElliott.Kubwa:kubwa:v2.0.0'
+  implementation 'com.github.WesleyElliott.Kubwa:kubwa-annotations:v2.0.0'
+  annotationProcessor 'com.github.WesleyElliott.Kubwa:kubwa-compiler:v2.0.0'
+  // Or if you're using Kotlin, kapt:
+  kapt 'com.github.WesleyElliott.Kubwa:kubwa-compiler:v2.0.0'
 }
 ```
 ## License
 
 ```
-Copyright 2016 Wesley Elliott
+Copyright 2019 Wesley Elliott
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
